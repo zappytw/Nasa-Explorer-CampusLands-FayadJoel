@@ -7,6 +7,8 @@
     --glass: rgba(255, 255, 255, 0.05);
 }
 
+
+
 * {
     margin: 0;
     padding: 0;
@@ -83,7 +85,7 @@ nav h1 {
 input[type="date"] {
     background: var(--glass);
     border: 1px solid var(--glass);
-    color: white;
+    color: var(--text);
     padding: 10px;
     border-radius: 8px;
     outline: none;
@@ -132,7 +134,7 @@ input[type="date"] {
 .card:hover img { transform: scale(1.1); }
 
 .card-content { padding: 20px; }
-.card h3 { font-size: 1.1rem; margin-bottom: 8px; color: #fff; }
+.card h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text); }
 .card small { color: var(--primary); font-weight: bold; }
 
 /* ===== Modal ===== */
@@ -171,7 +173,7 @@ input[type="date"] {
     right: 20px;
     background: rgba(255,255,255,0.1);
     border: none;
-    color: white;
+    color: var(--text);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -212,4 +214,122 @@ input[type="date"] {
     padding: 50px;
     font-size: 1.2rem;
     color: var(--primary);
+}
+
+.navDiv{
+    display: flex;
+    gap: 20px;
+}
+
+#viewModeBtn{
+    background: #111827;
+    width: fit-content;
+    height: fit-content;
+    padding: 0;
+}
+
+#viewModeBtn:hover{
+    background:rgba(0, 212, 255, 0.15);
+}
+
+body.light {
+
+    --primary: #0077ff;
+    --accent: #ff2d7a; 
+
+    --bg: #f4f7fb;  
+    --text: #0f172a;
+    
+    --card-bg: rgba(255, 255, 255, 0.75);
+    --glass: rgba(0, 0, 0, 0.08);
+
+    --border-soft: rgba(0,0,0,0.08);
+    --shadow-soft: rgba(0,0,0,0.08);
+    --hover-glow: rgba(0,119,255,0.15);
+}
+
+body.light {
+    background: radial-gradient(
+        circle at top,
+        #ffffff 0%,
+        #e6edf6 100%
+    );
+    color: var(--text);
+}
+
+body.light nav {
+    background: rgba(255,255,255,0.7);
+    border-bottom: 1px solid var(--border-soft);
+}
+
+body.light .card {
+    border: 1px solid var(--border-soft);
+    box-shadow: 0 10px 25px var(--shadow-soft);
+}
+
+body.light .card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px var(--hover-glow);
+}
+
+body.light .modal {
+    background: rgba(255,255,255,0.85);
+}
+
+body.light .modal-content {
+    background: #ffffff;
+}
+
+body.light input[type="date"] {
+    background: rgba(255,255,255,0.9);
+    color: var(--text);
+    border: 1px solid var(--border-soft);
+}
+
+body.light .btn-primary:hover {
+    background: #005fe0;
+    color: white;
+}
+
+body.light .toast {
+    color: white;
+}
+
+body.light #viewModeBtn{
+    background: rgba(221, 221, 221, 0.75)
+}
+body.light nav h1{
+    background: linear-gradient(90deg, var(--primary), #111827);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.light .hero p{
+    color: rgb(85, 85, 85);
+}
+
+#nameInput {
+    background: var(--glass);
+    border: 1px solid var(--glass);
+    color: var(--text);
+    padding: 10px 14px;
+    border-radius: 8px;
+    outline: none;
+    font-size: 0.95rem;
+    transition: 0.3s ease;
+    min-width: 220px;
+}
+
+#nameInput::placeholder {
+    color: #9ca3af;
+}
+
+#nameInput:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(0,212,255,0.15);
+}
+
+body.light #nameInput {
+    background: rgba(255,255,255,0.9);
+    border: 1px solid var(--border-soft);
 }

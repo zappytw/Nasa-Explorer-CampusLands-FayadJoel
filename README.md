@@ -180,8 +180,8 @@ Compatible con: Desktop · Tablet · Mobile
 
 ## 🚀 Posibles Mejoras Futuras
 
-- [ ] 🌙 Modo oscuro / claro
-- [ ] 🔎 Búsqueda por palabra clave
+- [x] 🌙 Modo oscuro / claro
+- [x] 🔎 Búsqueda por palabra clave
 - [ ] 🎥 Soporte para videos (actualmente solo imágenes)
 - [ ] 🔄 Paginación
 - [ ] 🗃️ Backend para guardar favoritos en la nube

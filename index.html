@@ -10,7 +10,10 @@
 
 <nav>
   <h1>NASA Explorer</h1>
-  <button class="btn btn-primary" onclick="showFavorites()">⭐ Favoritos</button>
+  <div class="navDiv">
+    <button class="btn btn-primary" onclick="showFavorites()">⭐ Favoritos</button>
+    <button class="btn btn-primary" id="viewModeBtn"><img src="media/moon-solid-full.svg" style="width: 40px; height: 40px;" onclick="toggleViewMode()"></button>
+  </div>
 </nav>
 
 <section class="hero">
@@ -21,7 +24,8 @@
 <div class="controls">
   <input type="date" id="start">
   <input type="date" id="end">
-  <button class="btn btn-primary" onclick="loadRange()">🔍 Buscar Rango</button>
+    <input type="text" name="" id="nameInput" placeholder="Buscar por nombre (Opcional)">
+  <button class="btn btn-primary" onclick="loadRange()">🔍 Buscar</button>
   <button class="btn btn-primary" style="background:#334155; color:white;" onclick="loadToday()">📅 Hoy</button>
 </div>
 

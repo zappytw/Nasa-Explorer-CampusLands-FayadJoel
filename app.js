@@ -1,7 +1,7 @@
 /**
  * CONFIGURACIÓN Y ESTADO
  */
-const API_KEY = "API KEY";
+const API_KEY = "8IkO9Ij2AEfWSseaNAjmtAA3kv2chzjIUq3yB6lA";
 const BASE_URL = "https://api.nasa.gov/planetary/apod";
 const gallery = document.getElementById("gallery");
 const statusContainer = document.getElementById("statusContainer");
@@ -78,7 +78,7 @@ function openModal(data) {
         <small style="color:var(--primary)">${data.date}</small>
         <h2 style="margin:10px 0">${data.title}</h2>
         <img src="${data.hdurl || data.url}">
-        <p style="line-height:1.6; color:#cbd5e1; margin-bottom:20px">${data.explanation}</p>
+        <p style="line-height:1.6; color: var(--text); margin-bottom:20px">${data.explanation}</p>
         
         <div style="display:flex; gap:10px">
             <button class="btn" style="background:${isFavorite ? '#ef4444':'#22c55e'}; color:white" 
@@ -141,6 +141,10 @@ async function loadToday() {
     renderGallery(data);
 }
 
+function filterTitle(items,input){
+    return items.filter( item => item.title?.toLowerCase().includes(input.toLowerCase() ))
+}
+const nameInput = document.getElementById("nameInput")
 async function loadRange() {
     const start = document.getElementById("start").value;
     const end = document.getElementById("end").value;
@@ -149,9 +153,38 @@ async function loadRange() {
     if (start > end) return showToast("Fecha inicio mayor a fin");
 
     gallery.dataset.view = "all";
-    const data = await apiCall(`&start_date=${start}&end_date=${end}`);
+    let data = await apiCall(`&start_date=${start}&end_date=${end}`);
+    if(nameInput.value.trim !== ""){
+        data = filterTitle(data, nameInput.value.trim())
+    }
     renderGallery(data.reverse());
 }
 
 // Carga inicial
 loadToday();
+
+const modal = document.getElementById("modal");
+
+modal.addEventListener("click", (e) => {
+    // si se hizo click en el fondo y no en el contenido
+    if (e.target === modal) {
+        closeModal();
+    }
+});
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        closeModal();
+    }
+});
+
+const viewModeBtn = document.getElementById("viewModeBtn")
+
+function toggleViewMode(){
+    if (viewModeBtn.querySelector("img").src.includes("media/moon-solid-full.svg")){
+        viewModeBtn.querySelector("img").src="media/sun-solid-full.svg"
+    } else {
+        viewModeBtn.querySelector("img").src="media/moon-solid-full.svg"
+    }
+
+    document.body.classList.toggle("light")
+}
