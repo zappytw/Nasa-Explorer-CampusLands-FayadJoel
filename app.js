@@ -166,7 +166,6 @@ loadToday();
 const modal = document.getElementById("modal");
 
 modal.addEventListener("click", (e) => {
-    // si se hizo click en el fondo y no en el contenido
     if (e.target === modal) {
         closeModal();
     }
@@ -187,4 +186,9 @@ function toggleViewMode(){
     }
 
     document.body.classList.toggle("light")
+}
+async function loadRandom() {
+    gallery.dataset.view = "all";
+    const data = await apiCall("&count=1");
+    renderGallery(data);
 }
