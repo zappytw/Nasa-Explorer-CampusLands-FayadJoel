@@ -163,6 +163,9 @@ async function loadRange() {
 // Carga inicial
 loadToday();
 
+const viewModeBtn = document.getElementById("viewModeBtn")
+
+loadViewMode();
 const modal = document.getElementById("modal");
 
 modal.addEventListener("click", (e) => {
@@ -176,7 +179,6 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-const viewModeBtn = document.getElementById("viewModeBtn")
 
 function toggleViewMode(){
     if (viewModeBtn.querySelector("img").src.includes("media/moon-solid-full.svg")){
@@ -184,8 +186,22 @@ function toggleViewMode(){
     } else {
         viewModeBtn.querySelector("img").src="media/moon-solid-full.svg"
     }
-
+    if (localStorage.getItem("viewMode") === "dark" || undefined){
+        localStorage.setItem("viewMode","light")
+    } else {
+        localStorage.setItem("viewMode","dark")
+    }
     document.body.classList.toggle("light")
+}
+
+function loadViewMode(){
+    if (localStorage.getItem("viewMode") === "dark" || undefined){
+        document.body.classList.remove("light")
+        viewModeBtn.querySelector("img").src="media/moon-solid-full.svg"
+    } else {
+        document.body.classList.add("light")
+        viewModeBtn.querySelector("img").src="media/sun-solid-full.svg"
+    }
 }
 async function loadRandom() {
     gallery.dataset.view = "all";
