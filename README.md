@@ -1,241 +1,92 @@
-# 🚀 NASA Space Explorer – Pro Edition
+# NASA Space Explorer
 
-Aplicación web interactiva para explorar la **Imagen Astronómica del Día (APOD)** de la NASA utilizando la API oficial de [NASA Open APIs](https://api.nasa.gov/).
+> Astronomy Picture of the Day (APOD) viewer built on top of NASA's public API. Search by date range, save favorites locally, and download images in HD.
 
----
-
-## 🌌 ¿Qué permite hacer?
-
-- 📅 Consultar la imagen astronómica del día
-- 🔎 Buscar imágenes por rango de fechas
-- 🖼️ Visualizar información detallada en un modal elegante
-- ❤️ Guardar y eliminar imágenes favoritas
-- 📥 Descargar imágenes en alta resolución (HD)
-- ⚡ Experiencia moderna con animaciones y diseño glassmorphism
+![Status](https://img.shields.io/badge/status-stable-success?style=flat-square)
+![Stack](https://img.shields.io/badge/stack-vanilla%20JS-yellow?style=flat-square)
+![API](https://img.shields.io/badge/api-NASA%20APOD-blue?style=flat-square)
 
 ---
 
-## 🏗️ Arquitectura del Proyecto
+## Overview
+
+A single-page application that consumes the [NASA APOD API](https://api.nasa.gov/) to explore the universe one photo at a time. It started as a frontend exercise and grew into a small but complete product: it has its own state model, a favorites system persisted in `localStorage`, validation rules, and a modal-based detail view.
+
+**Built without frameworks** — pure HTML, CSS, and JavaScript.
+
+## Features
+
+- View today's astronomy picture automatically on load
+- Search any date range (validated against future dates and inverted ranges)
+- Detail modal with full explanation, title, date, and HD download
+- Save and remove favorites with persistence between sessions
+- Toast notifications for user feedback and errors
+- Responsive grid layout, mobile-friendly
+
+## Stack
+
+| Layer | Tech |
+|---|---|
+| Markup & Layout | HTML5, CSS Grid, Flexbox |
+| Styling | CSS3 with glassmorphism and custom animations |
+| Logic | JavaScript ES6+ |
+| Data | NASA APOD REST API via Fetch |
+| Persistence | Browser `localStorage` |
+
+## Project structure
 
 ```
-📁 nasa-space-explorer/
-│
-├── index.html     → Estructura principal de la aplicación
-├── styles.css     → Diseño visual, animaciones y layout
-└── app.js         → Lógica, API, renderizado y favoritos
+nasa-space-explorer/
+├── index.html      Markup and root layout
+├── styles.css      Visual styling and animations
+└── app.js          Application logic, API, rendering, favorites
 ```
 
----
+## Internal architecture
 
-## 🧠 Tecnologías Utilizadas
+The JS is organized in clear layers, even without a framework:
 
-- HTML5
-- CSS3 (Glassmorphism + Animaciones modernas)
-- JavaScript ES6+
-- Fetch API
-- LocalStorage
-- API pública de la NASA (APOD)
+| Layer | Responsibility |
+|---|---|
+| Config | `API_KEY`, `BASE_URL`, DOM references |
+| Service | `apiCall()` — fetch, normalization, error handling, loader |
+| UI helpers | `showToast()`, `showLoading()`, `renderGallery()` |
+| Components | `createCard()`, `openModal()`, `closeModal()` |
+| Actions | `loadToday()`, `loadRange()`, `toggleFavorite()` |
 
----
-
-## 🔭 API Utilizada
-
-### 📡 APOD – Astronomy Picture of the Day
-
-**Endpoint:**
-```
-https://api.nasa.gov/planetary/apod
-```
-
-**Parámetros utilizados:**
-
-| Parámetro    | Descripción                        |
-|--------------|------------------------------------|
-| `api_key`    | Clave de acceso a la API           |
-| `start_date` | Fecha inicial (`YYYY-MM-DD`)       |
-| `end_date`   | Fecha final (`YYYY-MM-DD`)         |
-
-🔗 [Documentación oficial de la NASA API](https://api.nasa.gov/)
-
----
-
-## ⚙️ Instalación y Uso
-
-### 1️⃣ Clonar el repositorio
+## Run locally
 
 ```bash
-git clone https://github.com/tuusuario/nasa-space-explorer.git
-cd nasa-space-explorer
+git clone https://github.com/zappytw/Nasa-Explorer-CampusLands-FayadJoel.git
+cd Nasa-Explorer-CampusLands-FayadJoel
 ```
 
-### 2️⃣ Configurar la API Key
+Add your NASA API key in `app.js`:
 
-En `app.js`:
-
-```javascript
-const API_KEY = "TU_API_KEY_AQUI";
+```js
+const API_KEY = "YOUR_NASA_API_KEY";
 ```
 
-> Puedes obtener una API key gratuita desde el [portal de desarrolladores de la NASA](https://api.nasa.gov/).
+Open `index.html` in a browser. No build step, no dependencies.
 
-### 3️⃣ Ejecutar
+> Get a free API key at [api.nasa.gov](https://api.nasa.gov/).
 
-Simplemente abre `index.html` en tu navegador.
+## Roadmap
 
-> ✅ No requiere servidor ni dependencias externas.
+- [x] Day/night theme toggle
+- [x] Keyword search
+- [ ] Video support (currently images only)
+- [ ] Cloud-synced favorites
+- [ ] Pagination for large date ranges
+- [ ] Social sharing
 
----
+## What I learned building this
 
-## 🧩 Funcionalidades Detalladas
-
-### 📅 Cargar Imagen del Día — `loadToday()`
-- Consulta la API sin parámetros de fecha
-- Renderiza la imagen del día actual
-
-### 🔍 Buscar por Rango — `loadRange()`
-Validaciones incluidas:
-- Ambas fechas deben estar presentes
-- La fecha inicial no puede ser mayor a la final
-- No se permiten fechas futuras
-
-### 🖼️ Modal Interactivo
-Al hacer clic en una tarjeta:
-- Muestra la imagen en HD
-- Muestra la explicación completa, fecha y título
-- Botón para guardar/eliminar de favoritos
-- Botón para descargar la imagen HD
-
-### ❤️ Sistema de Favoritos
-- Persistencia con `localStorage`
-- Clave utilizada: `nasa_favs`
-
-Funciones principales:
-```javascript
-getFavorites()
-checkIfFavorite(date)
-toggleFavorite(data)
-showFavorites()
-```
+- Designing a small but real state model in vanilla JS
+- Defensive API calls and user-facing error handling
+- Building UX (modals, toasts, animations) without UI libraries
+- Persisting client-side state cleanly with `localStorage`
 
 ---
 
-## 🎨 Diseño y UX
-
-### ✨ Estilo Visual
-- Glassmorphism
-- Gradientes espaciales
-- Animaciones suaves
-- Hover effects con profundidad
-- Diseño responsive
-
-### 🎬 Animaciones
-- `fadeIn`
-- `slideUp`
-- Escalado en hover de imágenes
-- Toast animado
-
----
-
-## 🗂️ Arquitectura Interna (JavaScript)
-
-| Capa | Elementos |
-|------|-----------|
-| **Configuración** | `API_KEY`, `BASE_URL`, `gallery`, `statusContainer` |
-| **Servicios (Datos)** | `apiCall()` – fetch, errores, normalización, loader |
-| **UI Helpers** | `showToast()`, `showLoading()`, `renderGallery()` |
-| **Componentes** | `createCard()`, `openModal()`, `closeModal()` |
-| **Acciones principales** | `loadToday()`, `loadRange()` |
-
----
-
-## 📱 Responsive Design
-
-La galería utiliza CSS Grid adaptable:
-
-```css
-grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-```
-
-Compatible con: Desktop · Tablet · Mobile
-
----
-
-## 🛡️ Manejo de Errores
-
-- Error de conexión → Toast de notificación 🚀
-- Validación de fechas antes de llamar a la API
-- Control de estado de carga (loading)
-- Fallback cuando no hay imágenes disponibles
-
----
-
-## 🔐 Buenas Prácticas
-
-- `loading="lazy"` en imágenes para mejor rendimiento
-- Validación previa a las llamadas a la API
-- Manejo seguro de favoritos con JSON
-- Restricción de fechas máximas al día actual
-
----
-
-## 🚀 Posibles Mejoras Futuras
-
-- [x] 🌙 Modo oscuro / claro
-- [x] 🔎 Búsqueda por palabra clave
-- [ ] 🎥 Soporte para videos (actualmente solo imágenes)
-- [ ] 🔄 Paginación
-- [ ] 🗃️ Backend para guardar favoritos en la nube
-- [ ] 📤 Compartir en redes sociales
-- [ ] 📊 Estadísticas de imágenes consultadas
-
----
-
-## 🧪 Flujo de Usuario
-
-1. El usuario abre la aplicación
-2. Se carga automáticamente la imagen del día
-3. Selecciona un rango de fechas
-4. Visualiza los resultados en grid
-5. Hace clic en una imagen para ver detalles
-6. La guarda en favoritos
-7. Accede a sus favoritos desde el navbar
-
----
-
-## 🏆 Objetivo del Proyecto
-
-Este proyecto demuestra:
-
-- Consumo de APIs REST
-- Manipulación del DOM
-- Arquitectura modular en frontend puro
-- Manejo de estado en cliente
-- Experiencia de usuario moderna sin frameworks
-
----
-
-## 📄 Licencia
-
-Proyecto educativo/demo. Uso libre para fines personales y de aprendizaje.
-
----
-
-## 👨‍💻 Autor
-Desarrollado por Cristian Diaz - **Trainer en Desarrollo de Software**
-
-Desarrollado como proyecto frontend para práctica de consumo de APIs y manipulación del DOM.
-
----
-
-
-<p align="center">
-  <img width="300" src="https://i.imgur.com/YYf2LgH.png" alt="Logo del autor">
-</p>
-
----
-<p align="center">
-  2026
-</p> 
----
-
-> 🌠 **NASA Space Explorer – Pro Edition** es una aplicación moderna, ligera y visualmente atractiva que permite explorar el universo desde el navegador con datos reales proporcionados por la NASA.
+Built by **Joel Fayad** — Frontend Developer based in Colombia.
